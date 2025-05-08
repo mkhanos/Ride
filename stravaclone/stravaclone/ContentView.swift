@@ -5,36 +5,38 @@
 //  Created by Momo Khan on 5/8/25.
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Map {
-            
-        }
-        .safeAreaInset(edge: .bottom) {
-            HStack {
-                Spacer()
-                Button("Start") {
-                    print("Start")
-                }
-                
-                Button("Stop") {
-                    print("Stop")
-                }
-                
-                Button("Finish") {
-                    print("Finish")
-                }
-                Spacer()
-            }
-            .padding(.top)
-            .background(.thinMaterial)
-        }
+  @State private var position: MapCameraPosition = .automatic
+
+  var body: some View {
+    Map(position: $position) {
+
     }
+    .safeAreaInset(edge: .bottom) {
+      HStack {
+        Spacer()
+        Button("Start") {
+          print("Start")
+        }
+
+        Button("Stop") {
+          print("Stop")
+        }
+
+        Button("Finish") {
+          print("Finish")
+        }
+        Spacer()
+      }
+      .padding(.top)
+      .background(.thinMaterial)
+    }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
 }
