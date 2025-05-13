@@ -27,7 +27,7 @@ class LocationManager: ObservableObject {
         }
     }
     
-    private init() {
+    public init() {
         startLocationUpdates()
     }
     
