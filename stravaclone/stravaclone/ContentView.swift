@@ -9,12 +9,11 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     @EnvironmentObject var locationManager: LocationManager
     
     
     var body: some View {
-        Map(position: $position) {
+        Map(position: $locationManager.position) {
             UserAnnotation()
         }
         .mapStyle(.standard)

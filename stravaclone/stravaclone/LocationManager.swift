@@ -1,8 +1,11 @@
 import CoreLocation
+import MapKit
+import SwiftUI
 import os
 
+
 @MainActor
-class LocationManager: ObservableObject {
+final class LocationManager: ObservableObject {
     let logger = Logger(subsystem: "com.momo.stravaclone", category: "LocationManager")
     
     private var backgroundActivitySession: CLBackgroundActivitySession?
@@ -10,6 +13,8 @@ class LocationManager: ObservableObject {
     @Published var lastUpdate: CLLocationUpdate? = nil
     @Published var lastLocation: CLLocation? = nil
     @Published var isStationary = true
+    @Published var pathCoordinates: [CLLocationCoordinate2D] = []
+    @Published var position: MapCameraPosition = .userLocation(fallback: .automatic)
     
     @Published
     var updatesStarted: Bool = UserDefaults.standard.bool(forKey: "locationUpdatesStarted") {
@@ -41,6 +46,8 @@ class LocationManager: ObservableObject {
                     }
                     self.lastUpdate = update
                     if let loc = update.location {
+                        pathCoordinates.append(loc.coordinate)
+                        position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
                         self.lastLocation = loc
                         self.isStationary = update.stationary
                     }
