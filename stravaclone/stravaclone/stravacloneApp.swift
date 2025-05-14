@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct stravacloneApp: App {
-    @StateObject var locationManager = LocationManager()
+    //@StateObject var locationManager = LocationManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(locationManager)
+               // .environmentObject(locationManager)
         }
     }
 }
