@@ -33,6 +33,8 @@ final class LocationManager: ObservableObject {
     }
     
     public init() {
+        backgroundUpdates = true
+        updatesStarted = true
         startLocationUpdates()
     }
     
@@ -50,6 +52,7 @@ final class LocationManager: ObservableObject {
                         position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
                         self.lastLocation = loc
                         self.isStationary = update.stationary
+                        
                     }
                 }
             } catch {
