@@ -9,11 +9,13 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var locationManager: LocationManager
+    @StateObject var locationManager = LocationManager()
     
     
     var body: some View {
         Map(position: $locationManager.position) {
+            MapPolyline(coordinates: locationManager.pathCoordinates)
+                .stroke(.blue, lineWidth: 4)
             UserAnnotation()
         }
         .mapStyle(.standard)
