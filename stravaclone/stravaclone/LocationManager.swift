@@ -3,7 +3,6 @@ import MapKit
 import SwiftUI
 import os
 
-
 @MainActor
 final class LocationManager: ObservableObject {
     let logger = Logger(subsystem: "com.momo.stravaclone", category: "LocationManager")
@@ -15,6 +14,9 @@ final class LocationManager: ObservableObject {
     @Published var isStationary = true
     @Published var pathCoordinates: [CLLocationCoordinate2D] = []
     @Published var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @Published var cameraDistance: Double = 500
+    @Published var heading: Double = 0
+    @Published var pitch: Double = 0
     
     @Published
     var updatesStarted: Bool = UserDefaults.standard.bool(forKey: "locationUpdatesStarted") {
@@ -27,15 +29,24 @@ final class LocationManager: ObservableObject {
     @Published
     var backgroundUpdates: Bool = UserDefaults.standard.bool(forKey: "BGActivitySessionStarted") {
         didSet {
-            backgroundUpdates ? self.backgroundActivitySession = CLBackgroundActivitySession() : self.backgroundActivitySession?.invalidate()
+            backgroundUpdates
+            ? self.backgroundActivitySession = CLBackgroundActivitySession()
+            : self.backgroundActivitySession?.invalidate()
             UserDefaults.standard.set(backgroundUpdates, forKey: "BGActivitySessionStarted")
         }
     }
     
-    public init() {
+    public init() {}
+    
+    func start() {
         backgroundUpdates = true
         updatesStarted = true
         startLocationUpdates()
+    }
+    
+    func stop () {
+        updatesStarted = false
+        stopBackgroundUpdates()
     }
     
     func startLocationUpdates() {
@@ -46,20 +57,9 @@ final class LocationManager: ObservableObject {
                     if !self.updatesStarted {
                         break
                     }
-                    self.lastUpdate = update
-                    if let loc = update.location, !self.isStationary {
-                        if let lastLoc = lastLocation {
-                            if loc.distance(from: lastLoc) > 1 {
-                                pathCoordinates.append(loc.coordinate)
-                                position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
-                            }
-                        } else {
-                            pathCoordinates.append(loc.coordinate)
-                            position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
-                        }
-                        self.lastLocation = loc
-                        self.isStationary = update.stationary
-                    }
+                    handleUpdate(update)
+                    guard let loc = update.location else { continue }
+                    handleLocationUpdate(loc)
                 }
             } catch {
                 self.logger.error("Could not start updates")
@@ -72,5 +72,31 @@ final class LocationManager: ObservableObject {
         self.logger.info("Stopping location updates")
         backgroundUpdates = false
     }
+    
+    func updateCamera(to newCenter: CLLocationCoordinate2D) {
+        let newCamera = MapCamera(
+            centerCoordinate: newCenter,
+            distance: self.cameraDistance,
+            heading: self.heading,
+            pitch: self.pitch
+        )
+        withAnimation(.easeInOut(duration: 0.5)) {
+            position = .camera(newCamera)
+        }
+    }
+    
+    func handleUpdate(_ update: CLLocationUpdate) {
+        self.lastUpdate = update
+        self.isStationary = update.stationary
+    }
+    func handleLocationUpdate(_ loc: CLLocation) {
+        if let last = self.lastLocation, loc.distance(from: last) > 1 {
+            self.pathCoordinates.append(loc.coordinate)
+            updateCamera(to: loc.coordinate)
+        } else {
+            self.pathCoordinates.append(loc.coordinate)
+            updateCamera(to: loc.coordinate)
+        }
+        self.lastLocation = loc
+    }
 }
-
