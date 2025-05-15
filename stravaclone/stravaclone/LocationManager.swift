@@ -47,12 +47,18 @@ final class LocationManager: ObservableObject {
                         break
                     }
                     self.lastUpdate = update
-                    if let loc = update.location {
-                        pathCoordinates.append(loc.coordinate)
-                        position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
+                    if let loc = update.location, !self.isStationary {
+                        if let lastLoc = lastLocation {
+                            if loc.distance(from: lastLoc) > 1 {
+                                pathCoordinates.append(loc.coordinate)
+                                position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
+                            }
+                        } else {
+                            pathCoordinates.append(loc.coordinate)
+                            position = .camera(.init(centerCoordinate: loc.coordinate, distance: 500))
+                        }
                         self.lastLocation = loc
                         self.isStationary = update.stationary
-                        
                     }
                 }
             } catch {
