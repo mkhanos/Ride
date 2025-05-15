@@ -22,16 +22,20 @@ struct ContentView: View {
         .mapControls {
             MapUserLocationButton()
         }
+        .onMapCameraChange { context in
+            locationManager.heading = context.camera.heading
+            locationManager.pitch = context.camera.pitch
+            locationManager.cameraDistance = context.camera.distance
+        }
         .safeAreaInset(edge: .bottom) {
             HStack {
                 Spacer()
                 Button("Start") {
-                    print("Start")
+                    locationManager.start()
                 }
                 Button("Stop") {
-                    print("Stop")
+                    locationManager.stop()
                 }
-                
                 Button("Finish") {
                     print("Finish")
                 }
