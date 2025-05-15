@@ -41,15 +41,14 @@ final class LocationManager: ObservableObject {
     func start() {
         backgroundUpdates = true
         updatesStarted = true
-        startLocationUpdates()
     }
     
     func stop () {
         updatesStarted = false
-        stopBackgroundUpdates()
     }
     
     func startLocationUpdates() {
+        self.logger.info("Starting location updates")
         Task {
             do {
                 let updates = CLLocationUpdate.liveUpdates(.fitness)
@@ -90,6 +89,7 @@ final class LocationManager: ObservableObject {
         self.isStationary = update.stationary
     }
     func handleLocationUpdate(_ loc: CLLocation) {
+        guard loc.horizontalAccuracy >= 0 && loc.horizontalAccuracy <= 10 else { return }
         if let last = self.lastLocation, loc.distance(from: last) > 1 {
             self.pathCoordinates.append(loc.coordinate)
             updateCamera(to: loc.coordinate)
