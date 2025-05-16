@@ -11,7 +11,10 @@ import SwiftUI
 struct SavedRidesView: View {
     @Query var rides: [Ride]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(rides, id: \.id) { ride in
+            Text("\(ride.distance)")
+        }
+        
     }
 }
 

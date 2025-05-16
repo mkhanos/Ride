@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct TabViews: View {
+    @Environment(\.modelContext) var modelContext
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            RecordRideView(context: modelContext)
+                .tabItem {
+                    Label("Record Ride", systemImage: "record.circle")
+                }
+            SavedRidesView()
+                .tabItem {
+                    Label("Saved Rides", systemImage: "bicycle")
+                }
+        }
     }
 }
 
