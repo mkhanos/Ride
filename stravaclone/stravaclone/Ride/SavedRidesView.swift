@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct Rides: View {
+struct SavedRidesView: View {
     @Query var rides: [Ride]
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
@@ -16,5 +16,5 @@ struct Rides: View {
 }
 
 #Preview {
-    Rides()
+    SavedRidesView()
 }
