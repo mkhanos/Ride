@@ -6,15 +6,20 @@
 //
 
 import MapKit
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var locationManager = LocationManager()
+    @StateObject var rideManager: RideManager
+    
+    init(context: ModelContext) {
+        _rideManager = StateObject(wrappedValue: RideManager(context: context))
+    }
     
     
     var body: some View {
-        Map(position: $locationManager.position) {
-            MapPolyline(coordinates: locationManager.pathCoordinates)
+        Map(position: $rideManager.cameraPosition) {
+            MapPolyline(coordinates: rideManager.rideRoute)
                 .stroke(.blue, lineWidth: 4)
             UserAnnotation()
         }
@@ -23,18 +28,18 @@ struct ContentView: View {
             MapUserLocationButton()
         }
         .onMapCameraChange { context in
-            locationManager.heading = context.camera.heading
-            locationManager.pitch = context.camera.pitch
-            locationManager.cameraDistance = context.camera.distance
+            rideManager.heading = context.camera.heading
+            rideManager.pitch = context.camera.pitch
+            rideManager.cameraDistance = context.camera.distance
         }
         .safeAreaInset(edge: .bottom) {
             HStack {
                 Spacer()
                 Button("Start") {
-                    locationManager.start()
+                    rideManager.start()
                 }
                 Button("Stop") {
-                    locationManager.stop()
+                    rideManager.stop()
                 }
                 Button("Finish") {
                     print("Finish")
@@ -47,6 +52,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}

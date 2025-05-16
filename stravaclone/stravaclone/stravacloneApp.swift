@@ -10,9 +10,11 @@ import SwiftUI
 @main
 struct stravacloneApp: App {
     //@StateObject var locationManager = LocationManager()
+    @Environment(\.modelContext) var modelContext
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(context: modelContext)
+                .modelContainer(for: Ride.self)
                // .environmentObject(locationManager)
         }
     }
