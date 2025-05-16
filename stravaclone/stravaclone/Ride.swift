@@ -10,12 +10,12 @@ import MapKit
 
 @Model
 class Ride {
-    var startLocation: CLLocation
-    var endLocation: CLLocation
+    var startLocation: Coordinate
+    var endLocation: Coordinate
     var distance: Double
-    var route: [CLLocationCoordinate2D]
+    var route: [Coordinate]
     
-    init(startLocation: CLLocation, endLocation: CLLocation, distance: Double, route: [CLLocationCoordinate2D]) {
+    init(startLocation: Coordinate, endLocation: Coordinate, distance: Double, route: [Coordinate]) {
         self.startLocation = startLocation
         self.endLocation = endLocation
         self.distance = distance

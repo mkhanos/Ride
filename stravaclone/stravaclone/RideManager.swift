@@ -55,10 +55,13 @@ final class RideManager: ObservableObject {
     
     func saveCurrentRide() {
         guard rideRoute.count > 0 else { return }
-        let ride = Ride(startLocation: CLLocation(latitude: rideRoute[0].latitude, longitude: rideRoute[0].longitude),
-                        endLocation: CLLocation(latitude: rideRoute[rideRoute.count-1].latitude, longitude: rideRoute[rideRoute.count-1].longitude),
+        let startLocation = Coordinate(from: rideRoute[0])
+        let endLocation = Coordinate(from: rideRoute[rideRoute.count-1])
+        let route = rideRoute.map { Coordinate(from: $0) }
+        let ride = Ride(startLocation: startLocation,
+                        endLocation: endLocation,
                         distance: distanceTravelled,
-                        route: rideRoute)
+                        route: route)
         context.insert(ride)
         try? context.save()
         clearRideData()
