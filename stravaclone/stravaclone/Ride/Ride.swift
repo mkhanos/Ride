@@ -11,6 +11,7 @@ import MapKit
 @Model
 class Ride {
     var route: [RideCoordinate]
+    var createdAt: Date
     
     var totalTime: TimeInterval {
         let start = route[0].timestamp
@@ -32,7 +33,16 @@ class Ride {
         totalDistance / totalTime
     }
     
+    var startLocation: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: route[0].latitude, longitude: route[0].longitude)
+    }
+    
+    var endLocation: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: route[route.count-1].latitude, longitude: route[route.count-1].longitude)
+    }
+    
     init(route: [RideCoordinate]) {
         self.route = route
+        self.createdAt = Date()
     }
 }
