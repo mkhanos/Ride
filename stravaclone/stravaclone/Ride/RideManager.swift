@@ -20,7 +20,7 @@ final class RideManager: ObservableObject {
     @Published var cameraDistance: Double = 500
     @Published var heading: Double = 0
     @Published var pitch: Double = 0
-    @Published var distanceTravelled: Double = 0
+    @Published var isTracking: Bool = false
     
     @Published
     var updatesStarted: Bool = UserDefaults.standard.bool(forKey: "locationUpdatesStarted") {
@@ -46,11 +46,17 @@ final class RideManager: ObservableObject {
     
     func start() {
         backgroundUpdates = true
+        withAnimation {
+            isTracking = true
+        }
         updatesStarted = true
     }
     
     func stop() {
         updatesStarted = false
+        withAnimation {
+            isTracking = false
+        }
         saveCurrentRide()
     }
     
@@ -66,7 +72,6 @@ final class RideManager: ObservableObject {
         lastUpdate = nil
         lastLocation = nil
         rideRoute = []
-        distanceTravelled = 0
     }
     
     func startLocationUpdates() {
@@ -115,7 +120,6 @@ final class RideManager: ObservableObject {
         if let last = self.lastLocation, loc.distance(from: last) > 1 {
             self.savedRide.append(RideCoordinate(from: loc))
             self.rideRoute.append(loc.coordinate)
-            self.distanceTravelled += loc.distance(from: last)
             updateCamera(to: loc.coordinate)
         } else {
             self.rideRoute.append(loc.coordinate)

@@ -34,14 +34,8 @@ struct RecordRideView: View {
     .safeAreaInset(edge: .bottom) {
       HStack {
         Spacer()
-        Button("Start") {
-          rideManager.start()
-        }
-        Button("Stop") {
-          rideManager.stop()
-        }
-        Button("Finish") {
-          print("Finish")
+          Button(!rideManager.isTracking ? "Start" : "Stop") {
+              !rideManager.isTracking ? rideManager.start() : rideManager.stop()
         }
         Spacer()
       }
