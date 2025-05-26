@@ -19,6 +19,12 @@ struct RideCoordinate: Codable {
         timestamp = location.timestamp
     }
     
+    init(latitude: Double, longitude: Double, timestamp: Date) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.timestamp = timestamp
+    }
+    
     var clLocationCordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
