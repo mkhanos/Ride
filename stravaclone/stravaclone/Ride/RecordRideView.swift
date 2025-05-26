@@ -45,7 +45,7 @@ struct RecordRideView: View {
         }
         Spacer()
       }
-      .padding(.top)
+      .padding(.vertical)
       .background(.thinMaterial)
     }
   }

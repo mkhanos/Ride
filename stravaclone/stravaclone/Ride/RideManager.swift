@@ -4,7 +4,8 @@ import SwiftData
 import SwiftUI
 import os
 
-final class RideManager: RideManagerProtocol {
+@MainActor
+final class RideManager: ObservableObject {
     let logger = Logger(subsystem: "com.momo.stravaclone", category: "LocationManager")
     
     private var backgroundActivitySession: CLBackgroundActivitySession?
@@ -14,6 +15,7 @@ final class RideManager: RideManagerProtocol {
     @Published var lastLocation: CLLocation? = nil
     @Published var isStationary = true
     @Published var rideRoute: [CLLocationCoordinate2D] = []
+    var savedRide: [RideCoordinate] = []
     @Published var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     @Published var cameraDistance: Double = 500
     @Published var heading: Double = 0
@@ -53,15 +55,8 @@ final class RideManager: RideManagerProtocol {
     }
     
     func saveCurrentRide() {
-        guard rideRoute.count > 0 else { return }
-        let startLocation = Coordinate(from: rideRoute[0])
-        let endLocation = Coordinate(from: rideRoute[rideRoute.count - 1])
-        let route = rideRoute.map { Coordinate(from: $0) }
-        let ride = Ride(
-            startLocation: startLocation,
-            endLocation: endLocation,
-            distance: distanceTravelled,
-            route: route)
+        guard savedRide.count >= 2 else { return }
+        let ride = Ride(route: savedRide)
         context.insert(ride)
         try? context.save()
         clearRideData()
@@ -118,6 +113,7 @@ final class RideManager: RideManagerProtocol {
     func handleLocationUpdate(_ loc: CLLocation) {
         guard loc.horizontalAccuracy >= 0 && loc.horizontalAccuracy <= 10 else { return }
         if let last = self.lastLocation, loc.distance(from: last) > 1 {
+            self.savedRide.append(RideCoordinate(from: loc))
             self.rideRoute.append(loc.coordinate)
             self.distanceTravelled += loc.distance(from: last)
             updateCamera(to: loc.coordinate)

@@ -1,5 +1,5 @@
 //
-//  Coordinate.swift
+//  RideCoordinate.swift
 //  stravaclone
 //
 //  Created by Momo Khan on 5/16/25.
@@ -8,13 +8,15 @@
 import Foundation
 import CoreLocation
 
-struct Coordinate: Codable {
+struct RideCoordinate: Codable {
     var latitude: Double
     var longitude: Double
+    var timestamp: Date
     
-    init(from location: CLLocationCoordinate2D) {
-        latitude = location.latitude
-        longitude = location.longitude
+    init(from location: CLLocation) {
+        latitude = location.coordinate.latitude
+        longitude = location.coordinate.longitude
+        timestamp = location.timestamp
     }
     
     var clLocationCordinate: CLLocationCoordinate2D {
