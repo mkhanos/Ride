@@ -17,7 +17,7 @@ struct RideCard: View {
                 VerticalTextLabel(title: "Time", subtitle: ride.totalTime.twoDecimalString)
                 VerticalTextLabel(title: "Avg Speed", subtitle: ride.averageSpeed.twoDecimalString)
             }
-            Map() {
+            Map(interactionModes: []) {
                 MapPolyline(coordinates: ride.route.map { $0.clLocationCordinate})
                     .stroke(.blue, lineWidth: 4)
             }
