@@ -22,8 +22,9 @@ struct RideCard: View {
                 MapPolyline(coordinates: ride.route.map { $0.clLocationCordinate})
                     .stroke(.blue, lineWidth: 4)
             }
-            .frame(height: 200)
         }
+        .aspectRatio( 16.0 / 9.0, contentMode: .fit)
+        .containerRelativeFrame(.horizontal)
     }
 }
 
