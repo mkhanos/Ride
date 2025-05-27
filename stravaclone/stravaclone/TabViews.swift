@@ -19,6 +19,10 @@ struct TabViews: View {
                 .tabItem {
                     Label("Saved Rides", systemImage: "bicycle")
                 }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
     }
 }

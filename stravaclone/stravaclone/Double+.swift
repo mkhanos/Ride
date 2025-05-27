@@ -5,8 +5,29 @@
 //  Created by Momo Khan on 5/26/25.
 //
 
+import Foundation
+
 extension Double {
     var twoDecimalString: String {
         String(format: "%.2f", self)
+    }
+    
+    var metersToMiles: String {
+        let miles = self / 1609.344
+        return String(format: "%.2f mi", miles)
+    }
+    
+    var metersToKilometers: String {
+        let km = self / 1000
+        return String(format: "%.2f km", km)
+    }
+    
+    var localizedDistance: String {
+        let distance = Measurement(value: self, unit: UnitLength.meters)
+        let formatter = MeasurementFormatter()
+        formatter.unitOptions = .providedUnit
+        formatter.numberFormatter.maximumFractionDigits = 2
+        let miles = distance.converted(to: .miles)
+        return formatter.string(from: miles)
     }
 }
