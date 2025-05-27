@@ -11,9 +11,24 @@ import SwiftUI
 struct SavedRidesView: View {
     @Query(sort: \Ride.createdAt, order: .reverse) var rides: [Ride]
     var body: some View {
-        List(rides, id: \.id) { ride in
-            RideCard(ride: ride)
+        ScrollView(.vertical) {
+            LazyVStack(alignment: .center, spacing: 20) {
+                ForEach(rides, id: \.id) { ride in
+                    RideCard(ride: ride)
+                        .scrollTransition(axis: .vertical) { content, phase in
+                            content
+                                .scaleEffect(
+                                    x: phase.isIdentity ? 1.0 : 0.80,
+                                    y: phase.isIdentity ? 1.0 : 0.80
+                                )
+                        }
+                }
+            }
+            .scrollTargetLayout()
         }
+        .contentMargins(.horizontal, 20)
+        .scrollTargetBehavior(.paging)
+        .scrollIndicators(.hidden)
     }
 }
 
