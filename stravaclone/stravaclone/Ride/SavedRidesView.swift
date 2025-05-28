@@ -27,7 +27,7 @@ struct SavedRidesView: View {
             .scrollTargetLayout()
         }
         .contentMargins(.horizontal, 20)
-        .scrollTargetBehavior(.paging)
+        .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
     }
 }
