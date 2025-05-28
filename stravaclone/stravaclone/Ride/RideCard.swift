@@ -22,7 +22,14 @@ struct RideCard: View {
             Map(interactionModes: []) {
                 MapPolyline(coordinates: ride.route.map { $0.clLocationCordinate})
                     .stroke(.blue, lineWidth: 4)
+                Marker("Start",
+                       systemImage: "mappin.and.ellipse",
+                       coordinate: ride.route[0].clLocationCordinate)
+                Marker("Finish",
+                       systemImage: "flag.pattern.checkered",
+                       coordinate: ride.route[ride.route.count-1].clLocationCordinate)
             }
+            .frame(height: 250)
         }
         .aspectRatio( 16.0 / 9.0, contentMode: .fit)
         .containerRelativeFrame(.horizontal)
