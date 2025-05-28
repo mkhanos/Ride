@@ -13,9 +13,10 @@ struct RideCard: View {
     var ride: Ride
     var body: some View {
         VStack(alignment: .leading) {
+            Text(ride.route[0].timestamp.localizedDateWithoutWeekdayAndTimezone)
             HStack {
                 VerticalTextLabel(title: "Distance", subtitle: settingsManager.isMetric ? ride.totalDistance.metersToKilometers : ride.totalDistance.metersToMiles)
-                VerticalTextLabel(title: "Time", subtitle: ride.totalTime.twoDecimalString)
+                VerticalTextLabel(title: "Time", subtitle: ride.totalTime.formattedTime)
                 VerticalTextLabel(title: "Avg Speed", subtitle: settingsManager.isMetric ? "\(ride.totalDistance.metersToKilometers)/h" : "\(ride.totalDistance.metersToMiles)/h")
             }
             Map(interactionModes: []) {
