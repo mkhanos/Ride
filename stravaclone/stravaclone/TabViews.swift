@@ -13,11 +13,11 @@ struct TabViews: View {
         TabView {
             RecordRideView(context: modelContext)
                 .tabItem {
-                    Label("Record Ride", systemImage: "record.circle")
+                    Label("Record", systemImage: "record.circle")
                 }
             SavedRidesView()
                 .tabItem {
-                    Label("Saved Rides", systemImage: "bicycle")
+                    Label("Activities", systemImage: "bicycle")
                 }
             SettingsView()
                 .tabItem {
