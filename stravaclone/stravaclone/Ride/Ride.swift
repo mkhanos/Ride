@@ -1,6 +1,6 @@
 //
 //  Ride.swift
-//  
+//
 //
 //  Created by Momo Khan on 5/16/25.
 //
@@ -10,7 +10,7 @@ import SwiftData
 import MapKit
 
 @Model
-class Ride {
+class Ride: Codable {
     var route: [RideCoordinate]
     var createdAt: Date
     
@@ -45,6 +45,23 @@ class Ride {
     init(route: [RideCoordinate]) {
         self.route = route
         self.createdAt = Date()
+    }
+    
+    enum CodingKeys: CodingKey {
+        case route
+        case createdAt
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.route = try container.decode([RideCoordinate].self, forKey: .route)
+        self.createdAt = try container.decode(Date.self, forKey: .createdAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(route, forKey: .route)
+        try container.encode(createdAt, forKey: .createdAt)
     }
 }
 
