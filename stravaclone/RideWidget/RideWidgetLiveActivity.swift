@@ -10,13 +10,13 @@ import WidgetKit
 import SwiftUI
 
 struct RideWidgetAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var emoji: String
+    let ride: Ride
+    
+    struct ContentState: Codable, Hashable {
+        let rideDistance: Double
+        let rideTime: Double
+        let rideSpeed: Double
     }
-
-    // Fixed non-changing properties about your activity go here!
-    var name: String
 }
 
 struct RideWidgetLiveActivity: Widget {
@@ -24,7 +24,7 @@ struct RideWidgetLiveActivity: Widget {
         ActivityConfiguration(for: RideWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                Text("Hello \(context.state.emoji)")
+                Text("Hello \(context.state.rideDistance)")
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
@@ -40,15 +40,15 @@ struct RideWidgetLiveActivity: Widget {
                     Text("Trailing")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
+                    Text("Bottom \(context.state.rideDistance)")
                     // more content
                 }
             } compactLeading: {
                 Text("L")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text("T \(context.state.rideDistance)")
             } minimal: {
-                Text(context.state.emoji)
+                Text("\(context.state.rideDistance)")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -58,23 +58,23 @@ struct RideWidgetLiveActivity: Widget {
 
 extension RideWidgetAttributes {
     fileprivate static var preview: RideWidgetAttributes {
-        RideWidgetAttributes(name: "World")
+        RideWidgetAttributes(ride: Ride.mock)
     }
 }
 
-extension RideWidgetAttributes.ContentState {
-    fileprivate static var smiley: RideWidgetAttributes.ContentState {
-        RideWidgetAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: RideWidgetAttributes.ContentState {
-         RideWidgetAttributes.ContentState(emoji: "🤩")
-     }
-}
-
-#Preview("Notification", as: .content, using: RideWidgetAttributes.preview) {
-   RideWidgetLiveActivity()
-} contentStates: {
-    RideWidgetAttributes.ContentState.smiley
-    RideWidgetAttributes.ContentState.starEyes
-}
+//extension RideWidgetAttributes.ContentState {
+//    fileprivate static var smiley: RideWidgetAttributes.ContentState {
+//        RideWidgetAttributes.ContentState(emoji: "😀")
+//     }
+//     
+//     fileprivate static var starEyes: RideWidgetAttributes.ContentState {
+//         RideWidgetAttributes.ContentState(emoji: "🤩")
+//     }
+//}
+//
+//#Preview("Notification", as: .content, using: RideWidgetAttributes.preview) {
+//   RideWidgetLiveActivity()
+//} contentStates: {
+//    RideWidgetAttributes.ContentState.smiley
+//    RideWidgetAttributes.ContentState.starEyes
+//}
