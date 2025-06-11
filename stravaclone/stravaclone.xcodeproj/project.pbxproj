@@ -6,8 +6,41 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FADDC8922DFA0BE800EA7209 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADDC8732DFA099900EA7209 /* WidgetKit.framework */; };
+		FADDC8932DFA0BE800EA7209 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADDC8752DFA099900EA7209 /* SwiftUI.framework */; };
+		FADDC8A22DFA0BE800EA7209 /* RideWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FADDC8912DFA0BE800EA7209 /* RideWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FADDC8A02DFA0BE800EA7209 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAD467042DCD4731009F0D6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FADDC8902DFA0BE800EA7209;
+			remoteInfo = RideWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FADDC88C2DFA099A00EA7209 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FADDC8A22DFA0BE800EA7209 /* RideWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		FAD4670C2DCD4731009F0D6A /* stravaclone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stravaclone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FADDC8732DFA099900EA7209 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FADDC8752DFA099900EA7209 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FADDC8912DFA0BE800EA7209 /* RideWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RideWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -18,6 +51,21 @@
 			);
 			target = FAD4670B2DCD4731009F0D6A /* stravaclone */;
 		};
+		FADDC8A62DFA0BE800EA7209 /* Exceptions for "RideWidget" folder in "RideWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */;
+		};
+		FADDC8A82DFA0C1400EA7209 /* Exceptions for "stravaclone" folder in "RideWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Ride/Ride.swift,
+				RideCoordinate.swift,
+			);
+			target = FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -25,8 +73,17 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				FAD4672E2DD4ECAE009F0D6A /* Exceptions for "stravaclone" folder in "stravaclone" target */,
+				FADDC8A82DFA0C1400EA7209 /* Exceptions for "stravaclone" folder in "RideWidgetExtension" target */,
 			);
 			path = stravaclone;
+			sourceTree = "<group>";
+		};
+		FADDC8942DFA0BE800EA7209 /* RideWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FADDC8A62DFA0BE800EA7209 /* Exceptions for "RideWidget" folder in "RideWidgetExtension" target */,
+			);
+			path = RideWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,6 +96,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FADDC88E2DFA0BE800EA7209 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADDC8932DFA0BE800EA7209 /* SwiftUI.framework in Frameworks */,
+				FADDC8922DFA0BE800EA7209 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -46,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				FAD4670E2DCD4731009F0D6A /* stravaclone */,
+				FADDC8942DFA0BE800EA7209 /* RideWidget */,
+				FADDC8722DFA099900EA7209 /* Frameworks */,
 				FAD4670D2DCD4731009F0D6A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +122,18 @@
 			isa = PBXGroup;
 			children = (
 				FAD4670C2DCD4731009F0D6A /* stravaclone.app */,
+				FADDC8912DFA0BE800EA7209 /* RideWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FADDC8722DFA099900EA7209 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FADDC8732DFA099900EA7209 /* WidgetKit.framework */,
+				FADDC8752DFA099900EA7209 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -68,10 +146,12 @@
 				FAD467082DCD4731009F0D6A /* Sources */,
 				FAD467092DCD4731009F0D6A /* Frameworks */,
 				FAD4670A2DCD4731009F0D6A /* Resources */,
+				FADDC88C2DFA099A00EA7209 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FADDC8A12DFA0BE800EA7209 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				FAD4670E2DCD4731009F0D6A /* stravaclone */,
@@ -83,6 +163,28 @@
 			productReference = FAD4670C2DCD4731009F0D6A /* stravaclone.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FADDC8A32DFA0BE800EA7209 /* Build configuration list for PBXNativeTarget "RideWidgetExtension" */;
+			buildPhases = (
+				FADDC88D2DFA0BE800EA7209 /* Sources */,
+				FADDC88E2DFA0BE800EA7209 /* Frameworks */,
+				FADDC88F2DFA0BE800EA7209 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FADDC8942DFA0BE800EA7209 /* RideWidget */,
+			);
+			name = RideWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = RideWidgetExtension;
+			productReference = FADDC8912DFA0BE800EA7209 /* RideWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -90,11 +192,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					FAD4670B2DCD4731009F0D6A = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					FADDC8902DFA0BE800EA7209 = {
+						CreatedOnToolsVersion = 26.0;
 					};
 				};
 			};
@@ -113,12 +218,20 @@
 			projectRoot = "";
 			targets = (
 				FAD4670B2DCD4731009F0D6A /* stravaclone */,
+				FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FAD4670A2DCD4731009F0D6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FADDC88F2DFA0BE800EA7209 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +248,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FADDC88D2DFA0BE800EA7209 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FADDC8A12DFA0BE800EA7209 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */;
+			targetProxy = FADDC8A02DFA0BE800EA7209 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FAD467192DCD4732009F0D6A /* Debug */ = {
@@ -336,6 +464,69 @@
 			};
 			name = Release;
 		};
+		FADDC8A42DFA0BE800EA7209 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9RF5L7L699;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RideWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RideWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.momo.stravaclone.RideWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FADDC8A52DFA0BE800EA7209 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9RF5L7L699;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RideWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RideWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.momo.stravaclone.RideWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -353,6 +544,15 @@
 			buildConfigurations = (
 				FAD4671C2DCD4732009F0D6A /* Debug */,
 				FAD4671D2DCD4732009F0D6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FADDC8A32DFA0BE800EA7209 /* Build configuration list for PBXNativeTarget "RideWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FADDC8A42DFA0BE800EA7209 /* Debug */,
+				FADDC8A52DFA0BE800EA7209 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
