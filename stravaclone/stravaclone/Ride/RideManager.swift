@@ -9,13 +9,13 @@ final class RideManager: ObservableObject {
     let logger = Logger(subsystem: "com.momo.stravaclone", category: "LocationManager")
     
     private var backgroundActivitySession: CLBackgroundActivitySession?
-    private var context: ModelContext
+    private var context: ModelContext // context to insert into swift db
     
     @Published var lastUpdate: CLLocationUpdate? = nil
     @Published var lastLocation: CLLocation? = nil
     @Published var isStationary = true
-    @Published var rideRoute: [CLLocationCoordinate2D] = []
-    var savedRide: [RideCoordinate] = []
+    @Published var rideRoute: [CLLocationCoordinate2D] = [] // coordinates for drawing polyline on map
+    @Published var ride: Ride?
     @Published var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     @Published var cameraDistance: Double = 500
     @Published var heading: Double = 0
@@ -46,6 +46,7 @@ final class RideManager: ObservableObject {
     
     func start() {
         backgroundUpdates = true
+        ride = Ride(route: [])
         withAnimation {
             isTracking = true
         }
@@ -54,6 +55,7 @@ final class RideManager: ObservableObject {
     
     func stop() {
         updatesStarted = false
+        
         withAnimation {
             isTracking = false
         }
@@ -61,8 +63,8 @@ final class RideManager: ObservableObject {
     }
     
     func saveCurrentRide() {
-        guard savedRide.count >= 2 else { return }
-        let ride = Ride(route: savedRide)
+        guard let ride = ride else { return }
+        guard ride.route.count >= 2 else { return }
         context.insert(ride)
         try? context.save()
         clearRideData()
@@ -72,6 +74,7 @@ final class RideManager: ObservableObject {
         lastUpdate = nil
         lastLocation = nil
         rideRoute = []
+        ride = nil
     }
     
     func startLocationUpdates() {
@@ -118,7 +121,7 @@ final class RideManager: ObservableObject {
     func handleLocationUpdate(_ loc: CLLocation) {
         guard loc.horizontalAccuracy >= 0 && loc.horizontalAccuracy <= 10 else { return }
         if let last = self.lastLocation, loc.distance(from: last) > 1 {
-            self.savedRide.append(RideCoordinate(from: loc))
+            self.ride?.route.append(RideCoordinate(from: loc))
             self.rideRoute.append(loc.coordinate)
             updateCamera(to: loc.coordinate)
         } else {
