@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+        SimpleEntry(date: Date(), ride: Ride.mock)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+        let entry = SimpleEntry(date: Date(), ride: Ride.mock)
         completion(entry)
     }
 
@@ -25,7 +25,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
+            let entry = SimpleEntry(date: entryDate, ride: Ride.mock)
             entries.append(entry)
         }
 
@@ -40,7 +40,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let ride: Ride
 }
 
 struct RideWidgetEntryView : View {
@@ -48,11 +48,8 @@ struct RideWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Emoji:")
-            Text(entry.emoji)
+            Text("Ride Speed")
+            Text("\(entry.ride.averageSpeed)")
         }
     }
 }
@@ -76,9 +73,9 @@ struct RideWidget: Widget {
     }
 }
 
-#Preview(as: .systemSmall) {
-    RideWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
-}
+//#Preview(as: .systemSmall) {
+//    RideWidget()
+//} timeline: {
+//    SimpleEntry(date: .now, emoji: "😀")
+//    SimpleEntry(date: .now, emoji: "🤩")
+//}
