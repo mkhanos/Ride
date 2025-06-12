@@ -13,6 +13,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FAB335AD2DFB269000C9D5FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAD467042DCD4731009F0D6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAD4670B2DCD4731009F0D6A;
+			remoteInfo = stravaclone;
+		};
 		FADDC8A02DFA0BE800EA7209 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FAD467042DCD4731009F0D6A /* Project object */;
@@ -37,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FAB335A92DFB269000C9D5FB /* RideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD4670C2DCD4731009F0D6A /* stravaclone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stravaclone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADDC8732DFA099900EA7209 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		FADDC8752DFA099900EA7209 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -69,6 +77,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		FAB335AA2DFB269000C9D5FB /* RideTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RideTests;
+			sourceTree = "<group>";
+		};
 		FAD4670E2DCD4731009F0D6A /* stravaclone */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -89,6 +102,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FAB335A62DFB269000C9D5FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAD467092DCD4731009F0D6A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,6 +133,7 @@
 			children = (
 				FAD4670E2DCD4731009F0D6A /* stravaclone */,
 				FADDC8942DFA0BE800EA7209 /* RideWidget */,
+				FAB335AA2DFB269000C9D5FB /* RideTests */,
 				FADDC8722DFA099900EA7209 /* Frameworks */,
 				FAD4670D2DCD4731009F0D6A /* Products */,
 			);
@@ -123,6 +144,7 @@
 			children = (
 				FAD4670C2DCD4731009F0D6A /* stravaclone.app */,
 				FADDC8912DFA0BE800EA7209 /* RideWidgetExtension.appex */,
+				FAB335A92DFB269000C9D5FB /* RideTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +161,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FAB335A82DFB269000C9D5FB /* RideTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAB335B12DFB269000C9D5FB /* Build configuration list for PBXNativeTarget "RideTests" */;
+			buildPhases = (
+				FAB335A52DFB269000C9D5FB /* Sources */,
+				FAB335A62DFB269000C9D5FB /* Frameworks */,
+				FAB335A72DFB269000C9D5FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAB335AE2DFB269000C9D5FB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FAB335AA2DFB269000C9D5FB /* RideTests */,
+			);
+			name = RideTests;
+			packageProductDependencies = (
+			);
+			productName = RideTests;
+			productReference = FAB335A92DFB269000C9D5FB /* RideTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FAD4670B2DCD4731009F0D6A /* stravaclone */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD4671B2DCD4732009F0D6A /* Build configuration list for PBXNativeTarget "stravaclone" */;
@@ -195,6 +240,10 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					FAB335A82DFB269000C9D5FB = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = FAD4670B2DCD4731009F0D6A;
+					};
 					FAD4670B2DCD4731009F0D6A = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -219,11 +268,19 @@
 			targets = (
 				FAD4670B2DCD4731009F0D6A /* stravaclone */,
 				FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */,
+				FAB335A82DFB269000C9D5FB /* RideTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FAB335A72DFB269000C9D5FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAD4670A2DCD4731009F0D6A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +298,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FAB335A52DFB269000C9D5FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAD467082DCD4731009F0D6A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +322,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FAB335AE2DFB269000C9D5FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAD4670B2DCD4731009F0D6A /* stravaclone */;
+			targetProxy = FAB335AD2DFB269000C9D5FB /* PBXContainerItemProxy */;
+		};
 		FADDC8A12DFA0BE800EA7209 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */;
@@ -266,6 +335,51 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		FAB335AF2DFB269000C9D5FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9RF5L7L699;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.momo.RideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/stravaclone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/stravaclone";
+			};
+			name = Debug;
+		};
+		FAB335B02DFB269000C9D5FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9RF5L7L699;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.momo.RideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/stravaclone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/stravaclone";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		FAD467192DCD4732009F0D6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -532,6 +646,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FAB335B12DFB269000C9D5FB /* Build configuration list for PBXNativeTarget "RideTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAB335AF2DFB269000C9D5FB /* Debug */,
+				FAB335B02DFB269000C9D5FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FAD467072DCD4731009F0D6A /* Build configuration list for PBXProject "stravaclone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
