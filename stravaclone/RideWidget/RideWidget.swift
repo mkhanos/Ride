@@ -6,6 +6,7 @@
 //
 
 import WidgetKit
+import SwiftData
 import SwiftUI
 
 struct Provider: TimelineProvider {
@@ -19,15 +20,7 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, ride: Ride.mock)
-            entries.append(entry)
-        }
+        var entries: [SimpleEntry] = [SimpleEntry(date: Date(), ride: Ride.mock)]
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
@@ -73,9 +66,20 @@ struct RideWidget: Widget {
     }
 }
 
-//#Preview(as: .systemSmall) {
-//    RideWidget()
-//} timeline: {
-//    SimpleEntry(date: .now, emoji: "😀")
-//    SimpleEntry(date: .now, emoji: "🤩")
-//}
+#Preview(as: .systemSmall) {
+    RideWidget()
+} timeline: {
+    SimpleEntry(date: .now, ride: Ride.mock)
+}
+
+#Preview(as: .systemMedium) {
+    RideWidget()
+} timeline: {
+    SimpleEntry(date: .now, ride: Ride.mock)
+}
+
+#Preview(as: .systemLarge) {
+    RideWidget()
+} timeline: {
+    SimpleEntry(date: .now, ride: Ride.mock)
+}
