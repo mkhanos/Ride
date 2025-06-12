@@ -1,3 +1,4 @@
+import ActivityKit
 import CoreLocation
 import MapKit
 import SwiftData
@@ -118,6 +119,7 @@ final class RideManager: ObservableObject {
         self.lastUpdate = update
         self.isStationary = update.stationary
     }
+    
     func handleLocationUpdate(_ loc: CLLocation) {
         guard loc.horizontalAccuracy >= 0 && loc.horizontalAccuracy <= 10 else { return }
         if let last = self.lastLocation, loc.distance(from: last) > 1 {
@@ -130,4 +132,18 @@ final class RideManager: ObservableObject {
         }
         self.lastLocation = loc
     }
+    
+    func requestLiveActivity() {
+        guard let ride = ride else { return }
+        let attributes = RideWidgetAttributes(ride: ride)
+        let initialState = RideWidgetAttributes.ContentState(rideDistance: ride.totalDistance,
+                                                             rideTime: ride.totalTime.formattedTime,
+                                                             rideSpeed: ride.averageSpeed)
+    }
+    
+    func updateLiveactivty() {}
+    
+    func observeActivity(activity: Activity<RideWidgetAttributes>) {}
+    
+    func endActivty() {}
 }
