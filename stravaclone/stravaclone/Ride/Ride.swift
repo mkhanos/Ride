@@ -35,8 +35,7 @@ class Ride: Codable {
     
     // meters / hour
     var averageSpeed: CLLocationDistance {
-        var avgSpeed = totalDistance / totalTime // meters per second
-        avgSpeed *= 3600 // meters per hour
+        var avgSpeed = totalDistance / (totalTime/3600) // meters per second
         let roundedSpeed = round(avgSpeed * 100) / 100
         return roundedSpeed
     }
