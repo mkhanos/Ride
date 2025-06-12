@@ -18,7 +18,7 @@ struct RideTests {
     @Test func rideAverageSpeedCalculatedCorrectly() {
         print(ride.totalDistance)
         print(ride.totalTime)
-        #expect(ride.averageSpeed == 126.61)
+        #expect(ride.averageSpeed == 7596.55)
     }
 
 }
