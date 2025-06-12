@@ -13,7 +13,7 @@ struct stravacloneApp: App {
     var body: some Scene {
         WindowGroup {
             TabViews()
-                .modelContainer(for: Ride.self)
+                .modelContainer(sharedModelContainer)
                 .environmentObject(settingsManager)
                 .preferredColorScheme(settingsManager.isDarkMode ? .dark : .light)
         }
