@@ -14,7 +14,7 @@ struct RideWidgetAttributes: ActivityAttributes {
     
     struct ContentState: Codable, Hashable {
         let rideDistance: Double
-        let rideTime: Double
+        let rideTime: String
         let rideSpeed: Double
     }
 }
@@ -44,11 +44,11 @@ struct RideWidgetLiveActivity: Widget {
                     // more content
                 }
             } compactLeading: {
-                Text("L")
+                Text("L") // distance
             } compactTrailing: {
-                Text("T \(context.state.rideDistance)")
+                Text("T \(context.state.rideDistance)") // avg speed
             } minimal: {
-                Text("\(context.state.rideDistance)")
+                Text("\(context.state.rideDistance)") // distance and speed somehow?
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -62,19 +62,16 @@ extension RideWidgetAttributes {
     }
 }
 
-//extension RideWidgetAttributes.ContentState {
-//    fileprivate static var smiley: RideWidgetAttributes.ContentState {
-//        RideWidgetAttributes.ContentState(emoji: "😀")
-//     }
-//     
-//     fileprivate static var starEyes: RideWidgetAttributes.ContentState {
-//         RideWidgetAttributes.ContentState(emoji: "🤩")
-//     }
-//}
-//
-//#Preview("Notification", as: .content, using: RideWidgetAttributes.preview) {
-//   RideWidgetLiveActivity()
-//} contentStates: {
-//    RideWidgetAttributes.ContentState.smiley
-//    RideWidgetAttributes.ContentState.starEyes
-//}
+extension RideWidgetAttributes.ContentState {
+    fileprivate static var initial: RideWidgetAttributes.ContentState {
+        RideWidgetAttributes.ContentState(rideDistance: Ride.mock.totalDistance,
+                                          rideTime: Ride.mock.totalTime.formattedTime,
+                                          rideSpeed: Ride.mock.averageSpeed)
+     }
+}
+
+#Preview("Notification", as: .content, using: RideWidgetAttributes.preview) {
+   RideWidgetLiveActivity()
+} contentStates: {
+    RideWidgetAttributes.ContentState.initial
+}
