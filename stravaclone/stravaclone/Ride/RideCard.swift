@@ -17,7 +17,7 @@ struct RideCard: View {
             HStack {
                 VerticalTextLabel(title: "Distance", subtitle: settingsManager.isMetric ? ride.totalDistance.metersToKilometers : ride.totalDistance.metersToMiles)
                 VerticalTextLabel(title: "Time", subtitle: ride.totalTime.formattedTime)
-                VerticalTextLabel(title: "Avg Speed", subtitle: settingsManager.isMetric ? "\(ride.totalDistance.metersToKilometers)/h" : "\(ride.totalDistance.metersToMiles)/h")
+                VerticalTextLabel(title: "Avg Speed", subtitle: settingsManager.isMetric ? "\(ride.averageSpeed.metersToKilometers)/h" : "\(ride.averageSpeed.metersToMiles)/h")
             }
             Map(interactionModes: []) {
                 MapPolyline(coordinates: ride.route.map { $0.clLocationCordinate})

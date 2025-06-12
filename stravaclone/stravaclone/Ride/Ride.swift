@@ -14,12 +14,15 @@ class Ride: Codable {
     var route: [RideCoordinate]
     var createdAt: Date
     
+    // returned in minutes
     var totalTime: TimeInterval {
         let start = route[0].timestamp
         let end = route[route.count-1].timestamp
-        return end.timeIntervalSince(start)
+        let time = end.timeIntervalSince(start)
+        return time
     }
     
+    // returned in meters
     var totalDistance: CLLocationDistance {
         var distance = CLLocationDistance()
         for i in 1..<route.count {
@@ -30,8 +33,12 @@ class Ride: Codable {
         return distance
     }
     
+    // meters / hour
     var averageSpeed: CLLocationDistance {
-        totalDistance / totalTime
+        var avgSpeed = totalDistance / totalTime // meters per second
+        avgSpeed *= 3600 // meters per hour
+        let roundedSpeed = round(avgSpeed * 100) / 100
+        return roundedSpeed
     }
     
     var startLocation: CLLocationCoordinate2D {
