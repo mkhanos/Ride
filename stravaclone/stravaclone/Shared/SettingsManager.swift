@@ -8,6 +8,7 @@
 import Foundation
 
 final class SettingsManager: ObservableObject {
+    static let shared = SettingsManager()
     @Published var isMetric: Bool {
         didSet {
             UserDefaults.standard.set(isMetric, forKey: "isMetric")
@@ -19,7 +20,7 @@ final class SettingsManager: ObservableObject {
         }
     }
     
-    init() {
+    private init() {
         self.isMetric = UserDefaults.standard.bool(forKey: "isMetric")
         self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
     }

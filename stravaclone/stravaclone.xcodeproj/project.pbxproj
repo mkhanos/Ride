@@ -53,6 +53,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FAB335B72DFB636900C9D5FB /* Exceptions for "RideWidget" folder in "stravaclone" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RideWidgetLiveActivity.swift,
+			);
+			target = FAD4670B2DCD4731009F0D6A /* stravaclone */;
+		};
 		FAD4672E2DD4ECAE009F0D6A /* Exceptions for "stravaclone" folder in "stravaclone" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -70,8 +77,11 @@
 		FADDC8A82DFA0C1400EA7209 /* Exceptions for "stravaclone" folder in "RideWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Ride/Ride.swift,
-				Ride/RideCoordinate.swift,
+				"Shared/Date+.swift",
+				"Shared/Double+.swift",
+				Shared/Ride.swift,
+				Shared/RideCoordinate.swift,
+				Shared/SharedModelContainer.swift,
 			);
 			target = FADDC8902DFA0BE800EA7209 /* RideWidgetExtension */;
 		};
@@ -95,6 +105,7 @@
 		FADDC8942DFA0BE800EA7209 /* RideWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				FAB335B72DFB636900C9D5FB /* Exceptions for "RideWidget" folder in "stravaclone" target */,
 				FADDC8A62DFA0BE800EA7209 /* Exceptions for "RideWidget" folder in "RideWidgetExtension" target */,
 			);
 			path = RideWidget;
