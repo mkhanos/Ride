@@ -23,9 +23,18 @@ struct RideWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: RideWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.rideDistance)")
+            HStack {
+                VStack(alignment: .leading) {
+                    Image(systemName: "bicycle")
+                    Text("\(context.state.rideDistance.metersToMiles)")
+                }
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Text("\(context.state.rideTime)")
+                    Text("\(context.state.rideSpeed.metersToMiles) mph")
+                }
             }
+            .padding()
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
 
@@ -68,10 +77,17 @@ extension RideWidgetAttributes.ContentState {
                                           rideTime: Ride.mock.totalTime.formattedTime,
                                           rideSpeed: Ride.mock.averageSpeed)
      }
+    
+    fileprivate static var second: RideWidgetAttributes.ContentState {
+        RideWidgetAttributes.ContentState(rideDistance: Ride.mock.totalDistance*2,
+                                          rideTime: Ride.mock.totalTime.formattedTime,
+                                          rideSpeed: Ride.mock.averageSpeed*2)
+     }
 }
 
 #Preview("Notification", as: .content, using: RideWidgetAttributes.preview) {
    RideWidgetLiveActivity()
 } contentStates: {
     RideWidgetAttributes.ContentState.initial
+    RideWidgetAttributes.ContentState.second
 }
