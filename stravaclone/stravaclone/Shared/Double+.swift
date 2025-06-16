@@ -14,12 +14,12 @@ extension Double {
     
     var metersToMiles: String {
         let miles = self / 1609.344
-        return String(format: "%.2f mi", miles)
+        return String(format: "%.2f", miles)
     }
     
     var metersToKilometers: String {
         let km = self / 1000
-        return String(format: "%.2f km", km)
+        return String(format: "%.2f", km)
     }
     
     var localizedDistance: String {

@@ -1,6 +1,6 @@
 //
 //  Ride.swift
-//  
+//
 //
 //  Created by Momo Khan on 5/16/25.
 //
@@ -10,17 +10,22 @@ import SwiftData
 import MapKit
 
 @Model
-class Ride {
+class Ride: Codable {
     var route: [RideCoordinate]
     var createdAt: Date
     
+    // returned in minutes
     var totalTime: TimeInterval {
+        guard route.count > 0 else { return 0 }
         let start = route[0].timestamp
         let end = route[route.count-1].timestamp
-        return end.timeIntervalSince(start)
+        let time = end.timeIntervalSince(start)
+        return time
     }
     
+    // returned in meters
     var totalDistance: CLLocationDistance {
+        guard route.count > 2 else { return 0 }
         var distance = CLLocationDistance()
         for i in 1..<route.count {
             let prev = route[i-1].clLocation
@@ -30,8 +35,12 @@ class Ride {
         return distance
     }
     
+    // meters / hour
     var averageSpeed: CLLocationDistance {
-        totalDistance / totalTime
+        guard totalTime > 0 else { return 0 }
+        let avgSpeed = totalDistance / (totalTime/3600) // meters per second
+        let roundedSpeed = round(avgSpeed * 100) / 100
+        return roundedSpeed
     }
     
     var startLocation: CLLocationCoordinate2D {
@@ -45,6 +54,23 @@ class Ride {
     init(route: [RideCoordinate]) {
         self.route = route
         self.createdAt = Date()
+    }
+    
+    enum CodingKeys: CodingKey {
+        case route
+        case createdAt
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.route = try container.decode([RideCoordinate].self, forKey: .route)
+        self.createdAt = try container.decode(Date.self, forKey: .createdAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(route, forKey: .route)
+        try container.encode(createdAt, forKey: .createdAt)
     }
 }
 
