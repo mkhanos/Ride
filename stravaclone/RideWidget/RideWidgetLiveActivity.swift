@@ -10,8 +10,6 @@ import WidgetKit
 import SwiftUI
 
 struct RideWidgetAttributes: ActivityAttributes {
-    let ride: Ride
-    
     struct ContentState: Codable, Hashable {
         let rideDistance: Double
         let rideTime: String
@@ -68,7 +66,7 @@ struct RideWidgetLiveActivity: Widget {
 
 extension RideWidgetAttributes {
     fileprivate static var preview: RideWidgetAttributes {
-        RideWidgetAttributes(ride: Ride.mock)
+        RideWidgetAttributes()
     }
 }
 

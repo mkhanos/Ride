@@ -23,6 +23,8 @@ final class RideManager: ObservableObject {
     @Published var pitch: Double = 0
     @Published var isTracking: Bool = false
     
+    private var activity: Activity<RideWidgetAttributes>?
+    
     @Published
     var updatesStarted: Bool = UserDefaults.standard.bool(forKey: "locationUpdatesStarted") {
         didSet {
@@ -52,6 +54,7 @@ final class RideManager: ObservableObject {
             isTracking = true
         }
         updatesStarted = true
+        requestLiveActivity()
     }
     
     func stop() {
@@ -60,7 +63,11 @@ final class RideManager: ObservableObject {
         withAnimation {
             isTracking = false
         }
-        saveCurrentRide()
+        Task {
+            await endActivty()
+            saveCurrentRide()
+        }
+        
     }
     
     func saveCurrentRide() {
@@ -90,6 +97,7 @@ final class RideManager: ObservableObject {
                     handleUpdate(update)
                     guard let loc = update.location else { continue }
                     handleLocationUpdate(loc)
+                    await updateLiveactivty()
                 }
             } catch {
                 self.logger.error("Could not start updates")
@@ -122,7 +130,7 @@ final class RideManager: ObservableObject {
     
     func handleLocationUpdate(_ loc: CLLocation) {
         guard loc.horizontalAccuracy >= 0 && loc.horizontalAccuracy <= 10 else { return }
-        if let last = self.lastLocation, loc.distance(from: last) > 1 {
+        if let last = self.lastLocation {
             self.ride?.route.append(RideCoordinate(from: loc))
             self.rideRoute.append(loc.coordinate)
             updateCamera(to: loc.coordinate)
@@ -135,15 +143,31 @@ final class RideManager: ObservableObject {
     
     func requestLiveActivity() {
         guard let ride = ride else { return }
-        let attributes = RideWidgetAttributes(ride: ride)
+        let attributes = RideWidgetAttributes()
         let initialState = RideWidgetAttributes.ContentState(rideDistance: ride.totalDistance,
                                                              rideTime: ride.totalTime.formattedTime,
                                                              rideSpeed: ride.averageSpeed)
+        let content = ActivityContent(state: initialState, staleDate: nil, relevanceScore: 0)
+        
+        // TODO: - catch this
+        let activity = try? Activity.request(attributes: attributes,
+                                             content: content,
+                                             pushType: nil)
+        self.activity = activity
     }
     
-    func updateLiveactivty() {}
+    func updateLiveactivty() async  {
+        guard let ride = ride else { return }
+        guard let activity else { return }
+        let newState = RideWidgetAttributes.ContentState(rideDistance: ride.totalDistance, rideTime: ride.totalTime.formattedTime, rideSpeed: ride.averageSpeed)
+        await activity.update(using: newState)
+    }
     
-    func observeActivity(activity: Activity<RideWidgetAttributes>) {}
-    
-    func endActivty() {}
+    func endActivty() async {
+        guard let ride = ride else { return }
+        guard let activity = activity else { return }
+        let finalState = RideWidgetAttributes.ContentState(rideDistance: ride.totalDistance, rideTime: ride.totalTime.formattedTime, rideSpeed: ride.averageSpeed)
+        await activity.end(using: finalState, dismissalPolicy: .default)
+        self.activity = nil
+    }
 }

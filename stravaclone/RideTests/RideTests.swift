@@ -15,6 +15,7 @@ struct RideTests {
     init() {
         ride = Ride.mock
     }
+    
     @Test func rideAverageSpeedCalculatedCorrectly() {
         print(ride.totalDistance)
         print(ride.totalTime)
