@@ -43,21 +43,22 @@ struct RideWidgetLiveActivity: Widget {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Text("\(context.state.rideDistance.metersToMiles) mi")
+                        .padding(.all)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text("\(context.state.rideSpeed.metersToMiles) mph")
+                        .padding(.all)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.rideDistance)")
-                    // more content
+                    Text("\(context.state.rideTime)")
                 }
             } compactLeading: {
-                Text("L") // distance
+                Text("\(context.state.rideDistance.metersToMiles) mi") // distance
             } compactTrailing: {
-                Text("T \(context.state.rideDistance)") // avg speed
+                Text("\(context.state.rideSpeed.metersToMiles) mph") // avg speed
             } minimal: {
-                Text("\(context.state.rideDistance)") // distance and speed somehow?
+                Text("\(context.state.rideTime)") // distance and speed somehow?
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -90,4 +91,22 @@ extension RideWidgetAttributes.ContentState {
 } contentStates: {
     RideWidgetAttributes.ContentState.initial
     RideWidgetAttributes.ContentState.second
+}
+
+#Preview("Dynamic Island - Expanded", as: .dynamicIsland(.expanded), using: RideWidgetAttributes.preview) {
+    RideWidgetLiveActivity()
+} contentStates: {
+    RideWidgetAttributes.ContentState.initial
+}
+
+#Preview("Dynamic Island - Compact", as: .dynamicIsland(.compact), using: RideWidgetAttributes.preview) {
+    RideWidgetLiveActivity()
+} contentStates: {
+    RideWidgetAttributes.ContentState.initial
+}
+
+#Preview("Dynamic Island - Minimal", as: .dynamicIsland(.minimal), using: RideWidgetAttributes.preview) {
+    RideWidgetLiveActivity()
+} contentStates: {
+    RideWidgetAttributes.ContentState.initial
 }
