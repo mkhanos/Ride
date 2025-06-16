@@ -150,10 +150,14 @@ final class RideManager: ObservableObject {
         let content = ActivityContent(state: initialState, staleDate: nil, relevanceScore: 0)
         
         // TODO: - catch this
-        let activity = try? Activity.request(attributes: attributes,
-                                             content: content,
-                                             pushType: nil)
-        self.activity = activity
+        do {
+            let activity = try Activity.request(attributes: attributes,
+                                                content: content,
+                                                pushType: nil)
+            self.activity = activity
+        } catch {
+            print("Failed to start live activity \(error)")
+        }
     }
     
     func updateLiveactivty() async  {
