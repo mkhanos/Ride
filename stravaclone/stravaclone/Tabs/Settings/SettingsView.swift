@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var settingsManager: SettingsManager
+    @ObservedObject private var settingsManager = SettingsManager.shared
     
     var body: some View {
         VStack(alignment: .leading) {
