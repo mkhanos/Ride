@@ -18,31 +18,11 @@ struct RecordRideView: View {
     
     var body: some View {
         VStack {
-            Map(position: $rideManager.cameraPosition) {
-                MapPolyline(coordinates: rideManager.rideRoute)
-                    .stroke(.blue, lineWidth: 4)
-                UserAnnotation()
-            }
-            .mapStyle(.standard)
-            .mapControls {
-                MapUserLocationButton()
-            }
-            .onMapCameraChange { context in
-                rideManager.heading = context.camera.heading
-                rideManager.pitch = context.camera.pitch
-                rideManager.cameraDistance = context.camera.distance
-            }
+            MapView(rideManager: rideManager)
             .frame(height: 500) // TODO: - remove hard coded value
-            .safeAreaPadding(.top)
             Spacer()
-            HStack {
-                Spacer()
-                Button(!rideManager.isTracking ? "Start" : "Stop") {
-                    !rideManager.isTracking ? rideManager.start() : rideManager.stop()
-                }
-                Spacer()
-            }
-            .padding(.bottom)
+            RideStatsView(rideManager: rideManager)
+            Spacer()
         }
     }
 }
