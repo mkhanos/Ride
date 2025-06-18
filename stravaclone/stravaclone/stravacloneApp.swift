@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct stravacloneApp: App {
+    @ObservedObject private var settingsManager = SettingsManager.shared
     var body: some Scene {
         WindowGroup {
             TabViews()
                 .modelContainer(sharedModelContainer)
-                .preferredColorScheme(SettingsManager.shared.isDarkMode ? .dark : .light)
+                .preferredColorScheme(settingsManager.isDarkMode ? .dark : .light)
         }
         
     }
